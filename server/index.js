@@ -1,36 +1,49 @@
 require(`dotenv`).config();
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const { graphqlHTTP } = require('express-graphql');
+const graphql = require('graphql');
+const cors = require('cors');
+
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull,
+} = graphql;
 
 const app = express();
 
-const typeDefs = gql`
-  type Query {
-    sayHi: String
-    getUser: String
-  }
-`;
+// require database config
+// require('./configs/db.config');
 
-const resolvers = {
-  Query: {
-    sayHi: () => `Hello World`,
-    getUser: () => `getting user`,
-  },
-};
+// middleware setup
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+// --------use cors--------
+// app.use(
+//   cors({
+//     origin: [process.env.FRONTEND_POINT],
+//     credentials: true,
+//   })
+// );
+
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {},
+});
+
+const schema = new GraphQLSchema({
+  query: RootQuery,
 });
 
 app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    graphql: true,
+    graphiql: true,
   })
 );
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server listening on Port 5000`);
-});
+module.exports = app;
