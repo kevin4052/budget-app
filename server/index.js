@@ -17,7 +17,7 @@ const {
 const app = express();
 
 // require database config
-// require('./configs/db.config');
+require('./configs/db.config');
 
 // middleware setup
 
@@ -31,7 +31,16 @@ const app = express();
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
-  fields: {},
+  fields: {
+    user: {
+      type: GraphQLString,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        // return User.findById(args.id);
+        return 'kevin';
+      },
+    },
+  },
 });
 
 const schema = new GraphQLSchema({
