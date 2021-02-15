@@ -1,6 +1,8 @@
 require(`dotenv`).config();
-const { ApolloServer } = require(`apollo-server`);
-const gql = require(`graphql-tag`);
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+
+const app = express();
 
 const typeDefs = gql`
   type Query {
@@ -21,6 +23,14 @@ const server = new ApolloServer({
   resolvers,
 });
 
-server.listen(process.env.PORT || 5000).then((res) => {
-  console.log(`Server listening on Port ${res.url}`);
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphql: true,
+  })
+);
+
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server listening on Port 5000`);
 });
