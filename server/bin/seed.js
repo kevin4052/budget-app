@@ -10,14 +10,25 @@ const users = [
   },
 ];
 
-require('../configs/db.config');
-
-User.collection.drop();
-
-User.create(users)
-  .then((usersFromDB) => {
-    setTimeout(() => {
-      mongoose.disconnect();
-    }, 2000);
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
   })
-  .catch((err) => console.log({ err }));
+  .then(async (x) => {
+    console.log(
+      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+    );
+    await User.collection.drop();
+
+    User.create(users)
+      .then((usersFromDB) => {
+        setTimeout(() => {
+          mongoose.disconnect();
+        }, 2000);
+      })
+      .catch((err) => console.log({ err }));
+  })
+  .catch((err) => console.error(`Error connecting to mongo: ${err}`));
