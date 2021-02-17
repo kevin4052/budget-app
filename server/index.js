@@ -1,18 +1,10 @@
 require(`dotenv`).config();
+
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
-const graphql = require('graphql');
-const cors = require('cors');
+const schema = require('./schema/schema');
 
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLSchema,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLList,
-  GraphQLNonNull,
-} = graphql;
+const cors = require('cors');
 
 const app = express();
 
@@ -28,24 +20,6 @@ require('./configs/db.config');
 //     credentials: true,
 //   })
 // );
-
-const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
-  fields: {
-    user: {
-      type: GraphQLString,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        // return User.findById(args.id);
-        return 'kevin';
-      },
-    },
-  },
-});
-
-const schema = new GraphQLSchema({
-  query: RootQuery,
-});
 
 app.use(
   '/graphql',
