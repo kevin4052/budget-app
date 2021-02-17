@@ -8,6 +8,11 @@ const users = [
     email: 'kevin@kevin.com',
     passwordHash: 'hasssssssssssh',
   },
+  {
+    username: 'blah',
+    email: 'blah@blah.com',
+    passwordHash: 'blahHash',
+  },
 ];
 
 mongoose
