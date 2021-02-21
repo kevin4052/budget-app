@@ -19,6 +19,9 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.'],
     },
+    buckets: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Bucket' }],
+    },
   },
   {
     timestamps: true,
