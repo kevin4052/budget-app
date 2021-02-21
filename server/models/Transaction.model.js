@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const transaction = new Schema(
+const transactionSchema = new Schema(
   {
     name: {
       type: String,
@@ -17,4 +17,4 @@ const transaction = new Schema(
   }
 );
 
-module.exports = model('Bucket', transaction);
+module.exports = model('Transaction', transactionSchema);
