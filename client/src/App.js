@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  gql,
+} from "@apollo/client";
+// import BucketList from "./components/bucketList";
+import "./App.css";
+
+const client = new ApolloClient({
+  uri: "http://localhost:5000/graphql",
+  cache: new InMemoryCache(),
+});
+
+client
+  .query({
+    query: gql`
+      query buckets {
+        name
+        amount
+        transaction {
+          name
+          amount
+        }
+      }
+    `,
+  })
+  .then((result) => console.log(result))
+  .catch((err) => console.log({ err }));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <header className="App-header">
+          <h1>Kevin's List</h1>
+        </header>
+        {/* <BucketList /> */}
+      </div>
+    </ApolloProvider>
   );
 }
 
