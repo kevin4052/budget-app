@@ -21,8 +21,8 @@ const BucketList = () => {
 
   return (
     <div>
+      <h3>Buckets</h3>
       <ul id="bucket-list">
-        <li>bucket</li>
         {
           buckets.map(bucket => <li key={bucket.name}>{bucket.name}: {bucket.amount}</li>)
         }
