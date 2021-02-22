@@ -21,6 +21,8 @@ require('./configs/db.config');
 //   })
 // );
 
+// app.use(cors());
+
 app.use(
   '/graphql',
   graphqlHTTP({
