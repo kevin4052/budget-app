@@ -23,12 +23,14 @@ const BucketList = () => {
     <div>
       <h3>Buckets</h3>
       <ul id="bucket-list">
-        {
-          buckets.map(bucket => <li key={bucket.name}>{bucket.name}: {bucket.amount}</li>)
-        }
+        {buckets.map((bucket) => (
+          <li key={bucket.name}>
+            {bucket.name}: {bucket.amount}
+          </li>
+        ))}
       </ul>
     </div>
   );
-}
+};
 
 export default BucketList;
