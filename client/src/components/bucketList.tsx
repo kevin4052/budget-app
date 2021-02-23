@@ -10,7 +10,7 @@ const getBucketsList = gql`
   }
 `;
 
-const BucketList = () => {
+const BucketList: React.FC = () => {
   const { error, loading, data } = useQuery(getBucketsList);
   const [buckets, setBuckets] = useState([]);
   useEffect(() => {
@@ -23,9 +23,9 @@ const BucketList = () => {
     <div>
       <h3>Buckets</h3>
       <ul id="bucket-list">
-        {buckets.map((bucket) => (
-          <li key={bucket.name}>
-            {bucket.name}: {bucket.amount}
+        {buckets.map(({name, amount}) => (
+          <li key={name}>
+            {name}: {amount}
           </li>
         ))}
       </ul>
