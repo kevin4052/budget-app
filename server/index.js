@@ -14,14 +14,12 @@ require('./configs/db.config');
 // middleware setup
 
 // --------use cors--------
-// app.use(
-//   cors({
-//     origin: [process.env.FRONTEND_POINT],
-//     credentials: true,
-//   })
-// );
-
-// app.use(cors());
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_POINT],
+    credentials: true,
+  })
+);
 
 app.use(
   '/graphql',
