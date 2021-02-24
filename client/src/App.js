@@ -1,6 +1,7 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import BucketList from "./components/bucketList";
+import { Container, Icon, Box, Button } from "@material-ui/core";
 import "./App.css";
 
 // mobX and reach-context
@@ -39,9 +40,19 @@ function App() {
   return (
     // <StoreProvider>
     <ApolloProvider client={client}>
-      <h1>Kevin's List</h1>
-      {/* <UserList/> */}
-      <BucketList />
+      <Container maxWidth="sm">
+        <h1>Kevin's List</h1>
+        {/* <UserList/> */}
+        <BucketList />
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => {alert('clicked')}}
+          size="small"
+          endIcon={<Icon>send</Icon>}>
+          Hello World
+        </Button>
+      </Container>
     </ApolloProvider>
     // </StoreProvider>
   );

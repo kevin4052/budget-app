@@ -21,6 +21,7 @@ const getUserBucketsList = gql`
 const BucketList: React.FC = () => {
   const { error, loading, data } = useQuery(getUserBucketsList);
   const [buckets, setBuckets] = useState([]);
+  
   useEffect(() => {
     if (data) {
       setBuckets(data.user.buckets);
