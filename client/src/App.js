@@ -39,13 +39,9 @@ function App() {
   return (
     // <StoreProvider>
     <ApolloProvider client={client}>
-      <div className="App">
-        <header className="App-header">
-          <h1>Kevin's List</h1>
-          {/* <UserList/> */}
-          <BucketList />
-        </header>
-      </div>
+      <h1>Kevin's List</h1>
+      {/* <UserList/> */}
+      <BucketList />
     </ApolloProvider>
     // </StoreProvider>
   );

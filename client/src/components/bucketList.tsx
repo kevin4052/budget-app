@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 
-const getBucketsList = gql`
+const getUserBucketsList = gql`
   query {
-    buckets {
-      name
-      amount
+    user(email: "kevin@kevin.com") {
+      username
+      email
+      buckets {
+        name
+        amount
+        transactions {
+          name
+          amount
+        }
+      }
     }
   }
 `;
 
 const BucketList: React.FC = () => {
-  const { error, loading, data } = useQuery(getBucketsList);
+  const { error, loading, data } = useQuery(getUserBucketsList);
   const [buckets, setBuckets] = useState([]);
   useEffect(() => {
     if (data) {
-      setBuckets(data.buckets);
+      setBuckets(data.user.buckets);
     }
   }, [data]);
 
@@ -23,7 +31,7 @@ const BucketList: React.FC = () => {
     <div>
       <h3>Buckets</h3>
       <ul id="bucket-list">
-        {buckets.map(({name, amount}) => (
+        {buckets.map(({ name, amount }) => (
           <li key={name}>
             {name}: {amount}
           </li>
