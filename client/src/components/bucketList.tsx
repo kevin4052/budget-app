@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const BucketList: React.FC = () => {
-  const { error, loading, data } = useQuery(getUserBucketsList);
+const BucketList: React.FC = (() => {
+  const { data } = useQuery(getUserBucketsList);
   const [buckets, setBuckets] = useState([]);
   const classes = useStyles();
 
@@ -57,6 +57,6 @@ const BucketList: React.FC = () => {
       </Grid>
     </div>
   );
-};
+});
 
 export default BucketList;
