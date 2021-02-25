@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Grid, Paper } from "@material-ui/core";
 
 const getUserBucketsList = gql`
   query {
@@ -18,10 +20,24 @@ const getUserBucketsList = gql`
   }
 `;
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.primary,
+    },
+  })
+);
+
 const BucketList: React.FC = () => {
   const { error, loading, data } = useQuery(getUserBucketsList);
   const [buckets, setBuckets] = useState([]);
-  
+  const classes = useStyles();
+
   useEffect(() => {
     if (data) {
       setBuckets(data.user.buckets);
@@ -29,15 +45,16 @@ const BucketList: React.FC = () => {
   }, [data]);
 
   return (
-    <div>
-      <h3>Buckets</h3>
-      <ul id="bucket-list">
+    <div className={classes.root}>
+      <Grid container spacing={3}>
         {buckets.map(({ name, amount }) => (
-          <li key={name}>
-            {name}: {amount}
-          </li>
+          <Grid key={name} item xs={6}>
+            <Paper className={classes.paper}>
+              {name}: {amount}
+            </Paper>
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </div>
   );
 };

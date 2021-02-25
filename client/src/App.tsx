@@ -1,7 +1,8 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import BucketList from "./components/bucketList";
-import { Container, Icon, Box, Button } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Container, Icon, Paper, Grid, Button } from "@material-ui/core";
 import "./App.css";
 
 // mobX and reach-context
@@ -36,20 +37,41 @@ const client = new ApolloClient({
   credentials: "include",
 });
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.primary,
+    },
+  })
+);
+
 function App() {
+  const classes = useStyles();
   return (
     // <StoreProvider>
     <ApolloProvider client={client}>
       <Container maxWidth="sm">
-        <h1>Kevin's List</h1>
+        <Paper className={classes.paper}>
+          <h3>Kevin's List</h3>
+        </Paper>
+        <br />
         {/* <UserList/> */}
         <BucketList />
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={() => {alert('clicked')}}
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            alert("clicked");
+          }}
           size="small"
-          endIcon={<Icon>send</Icon>}>
+          endIcon={<Icon>send</Icon>}
+        >
           Hello World
         </Button>
       </Container>
