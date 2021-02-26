@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const getUserBucketsList = gql`
-  query {
-    user(email: "kevin@kevin.com") {
+  query user($email: String!) {
+    user(email: $email) {
       username
       email
       buckets {
@@ -17,4 +17,4 @@ const getUserBucketsList = gql`
   }
 `;
 
-export {getUserBucketsList};
+export { getUserBucketsList };

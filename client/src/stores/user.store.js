@@ -1,11 +1,11 @@
 export function createStore() {
   return {
-    data: ["kevin", "Liz"],
-    addData(item) {
-      this.data.push(item);
+    user: null,
+    addUser(data) {
+      this.user = data;
     },
-    removeData(item) {
-      this.data.splice(this.data.indexOf(item), 1);
+    removeUser() {
+      this.user = null;
     },
   };
 }

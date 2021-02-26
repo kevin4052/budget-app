@@ -1,9 +1,12 @@
 import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useObserver } from "mobx-react";
-import BucketList from "./components/bucketList";
+
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Container, Icon, Paper, Button } from "@material-ui/core";
+
+import BucketList from "./components/bucketList";
+
 import "./App.css";
 
 const client = new ApolloClient({
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function App() {
   const classes = useStyles();
+
   return useObserver(() => (
     <ApolloProvider client={client}>
         <Container maxWidth="sm">
